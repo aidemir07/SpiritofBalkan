@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sq">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -18,25 +18,12 @@
 
         * { box-sizing: border-box; scroll-behavior: smooth; }
         
-        body {
-            margin: 0;
-            font-family: 'Montserrat', sans-serif;
-            background: #fff;
-            color: var(--dark);
-        }
+        body { margin: 0; font-family: 'Montserrat', sans-serif; background: #fff; color: var(--dark); }
 
-        /* NAVIGATION & LANGUAGE */
         nav {
-            background: #fff;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 5%;
-            height: 80px;
-            position: fixed;
-            top: 0; width: 100%;
-            z-index: 9999;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background: #fff; display: flex; justify-content: space-between; align-items: center;
+            padding: 0 5%; height: 80px; position: fixed; top: 0; width: 100%;
+            z-index: 9999; box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
         .nav-links a {
@@ -49,7 +36,6 @@
             background: white; cursor: pointer; font-weight: 600;
         }
 
-        /* HERO */
         .hero {
             height: 50vh;
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
@@ -59,7 +45,6 @@
         }
         .hero h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(2em, 5vw, 4em); margin: 0; }
 
-        /* FEATURES bar */
         .tour-features {
             display: flex; justify-content: center; gap: 40px;
             background: var(--light-gray); padding: 25px; flex-wrap: wrap;
@@ -67,7 +52,6 @@
         .feature { text-align: center; font-size: 11px; font-weight: 700; text-transform: uppercase; }
         .feature i { display: block; font-size: 24px; color: var(--gold); margin-bottom: 8px; }
 
-        /* MAIN LAYOUT */
         .container { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
 
         .dest-buttons { display: flex; justify-content: center; gap: 10px; margin-bottom: 40px; flex-wrap: wrap; }
@@ -77,7 +61,6 @@
         }
         .btn-country.active { background: var(--gold); color: white; border-color: var(--gold); }
 
-        /* ACCORDION ITINERARY */
         .day-box { background: white; margin-bottom: 12px; border-radius: 8px; border: 1px solid #eee; }
         .day-header {
             padding: 20px; cursor: pointer; display: flex; justify-content: space-between;
@@ -85,12 +68,11 @@
         }
         .day-content {
             padding: 0 20px; max-height: 0; overflow: hidden;
-            transition: 0.4s ease-out; background: #fafafa;
+            transition: 0.4s ease-out; background: #fafafa; line-height: 1.6;
         }
-        .day-content.open { max-height: 800px; padding: 20px; border-top: 1px solid #eee; }
+        .day-content.open { max-height: 1000px; padding: 20px; border-top: 1px solid #eee; }
         .day-content img { width: 100%; border-radius: 8px; margin-top: 15px; }
 
-        /* CTA BOX */
         .cta-box {
             background: var(--dark); color: white; padding: 40px;
             border-radius: 15px; text-align: center; margin: 50px 0;
@@ -98,15 +80,14 @@
         .btn-book {
             background: var(--gold); color: white; padding: 16px 45px;
             text-decoration: none; font-weight: 700; border-radius: 5px; 
-            display: inline-block; margin-top: 20px; transition: 0.3s;
+            display: inline-block; margin-top: 20px; transition: 0.3s; cursor: pointer; border: none; font-size: 16px;
         }
         .btn-book:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(197, 160, 89, 0.4); }
 
-        /* CONTACT FORM */
         .form-container { background: #fff; padding: 40px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
         .form-group { margin-bottom: 15px; }
         .form-group input, .form-group textarea { 
-            width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 6px; font-family: inherit;
+            width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 6px; font-family: inherit; font-size: 14px;
         }
 
         .whatsapp-float {
@@ -125,111 +106,193 @@
 <nav>
     <div style="font-family:'Orbitron'; font-weight: 700; color: var(--gold); font-size: 1.2em;">SPIRIT OF BALKAN</div>
     <div class="nav-links">
-        <a href="#" id="nav-home">Home</a>
-        <a href="#itinerary" id="nav-tours">Tours</a>
-        <a href="#contact" id="nav-contact">Contact</a>
+        <a href="#" data-key="nav_home">Ballina</a>
+        <a href="#itinerary" data-key="nav_tours">Turet</a>
+        <a href="#contact" data-key="nav_contact">Kontakti</a>
     </div>
     <select class="lang-select" onchange="changeLanguage(this.value)">
+        <option value="sq" selected>Shqip</option>
         <option value="en">English</option>
         <option value="tr">Türkçe</option>
-        <option value="sq">Shqip</option>
         <option value="bs">Bosanski</option>
     </select>
 </nav>
 
 <div class="hero">
-    <h1 id="hero-title">BALKAN EXPLORER</h1>
-    <p id="hero-sub">Unforgettable journeys across history and nature</p>
+    <h1 data-key="hero_title">EKSPLORUESI I BALLKANIT</h1>
+    <p data-key="hero_sub">Udhëtime të paharrueshme mes historisë dhe natyrës</p>
 </div>
 
 <div class="tour-features">
-    <div class="feature"><i class="fas fa-hotel"></i> <span id="f-hotel">4-5 Star Hotels</span></div>
-    <div class="feature"><i class="fas fa-bus"></i> <span id="f-coach">Luxury Coach</span></div>
-    <div class="feature"><i class="fas fa-utensils"></i> <span id="f-halal">Halal Options</span></div>
-    <div class="feature"><i class="fas fa-id-badge"></i> <span id="f-guide">Licensed Guides</span></div>
+    <div class="feature"><i class="fas fa-hotel"></i> <span data-key="f1">Hotele 4-5 Yje</span></div>
+    <div class="feature"><i class="fas fa-bus"></i> <span data-key="f2">Autobus Luksoz</span></div>
+    <div class="feature"><i class="fas fa-utensils"></i> <span data-key="f3">Opsione Halal</span></div>
+    <div class="feature"><i class="fas fa-id-badge"></i> <span data-key="f4">Guidë e Licencuar</span></div>
 </div>
 
 <div class="container" id="itinerary">
     <div class="dest-buttons">
-        <button class="btn-country active" onclick="showCountry('kosovo', this)">KOSOVO</button>
-        <button class="btn-country" onclick="showCountry('albania', this)">ALBANIA</button>
-        <button class="btn-country" onclick="showCountry('bosnia', this)">BOSNIA</button>
-        <button class="btn-country" onclick="showCountry('macedonia', this)">MACEDONIA</button>
+        <button class="btn-country active" onclick="showCountry('kosovo', this)" data-key="btn_kos">KOSOVA</button>
+        <button class="btn-country" onclick="showCountry('albania', this)" data-key="btn_alb">SHQIPËRIA</button>
+        <button class="btn-country" onclick="showCountry('bosnia', this)" data-key="btn_bos">BOSNJA</button>
+        <button class="btn-country" onclick="showCountry('macedonia', this)" data-key="btn_mac">MAQEDONIA</button>
     </div>
 
     <div id="kosovo-tours" class="country-section" style="display:block;">
         <div class="day-box">
-            <div class="day-header" onclick="toggleDay(this)"><span>DAY 1: Prizren City Tour</span><i class="fas fa-plus"></i></div>
-            <div class="day-content">
-                <p>08:00 Breakfast at hotel. 09:00 Departure to Prizren. 14:00 Visit Sinan Pasha Mosque and the Fortress.</p>
-                <img src="https://wallpaperaccess.com/full/6760977.jpg">
-            </div>
+            <div class="day-header" onclick="toggleDay(this)"><span><span data-key="day_word">DITA</span> 1: <span data-key="kos_d1_t">Prishtinë - Kryeqyteti</span></span><i class="fas fa-plus"></i></div>
+            <div class="day-content"><p data-key="kos_d1_d"></p><img src="https://worldbank.scene7.com/is/image/worldbankprod/Untitled-design-1-3?wid=780&hei=439&qlt=85,0&resMode=sharp"></div>
         </div>
         <div class="day-box">
-            <div class="day-header" onclick="toggleDay(this)"><span>DAY 2: Rugova Canyon & Peja</span><i class="fas fa-plus"></i></div>
-            <div class="day-content"><p>08:00 Breakfast. 09:00 Hiking and sightseeing in Rugova Canyon. 15:00 Visit Peja Patriarchate.</p>
-            <img src="https://live.staticflickr.com/8461/7889046558_d3b3f6c256_b.jpg">
+            <div class="day-header" onclick="toggleDay(this)"><span><span data-key="day_word">DITA</span> 2: <span data-key="kos_d2_t">Gazimestan & Prekaz</span></span><i class="fas fa-plus"></i></div>
+            <div class="day-content"><p data-key="kos_d2_d"></p><img src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/4a4abb70207853.5b9b91cf53aec.jpg"></div>
         </div>
+        <div class="day-box">
+            <div class="day-header" onclick="toggleDay(this)"><span><span data-key="day_word">DITA</span> 3: <span data-key="kos_d3_t">Gadime & Brezovicë</span></span><i class="fas fa-plus"></i></div>
+            <div class="day-content"><p data-key="kos_d3_d"></p><img src="https://www.kosovo-vacations.com/ressourcen/images/gadime-cave-kosovo.jpg"></div>
+        </div>
+        <div class="day-box">
+            <div class="day-header" onclick="toggleDay(this)"><span><span data-key="day_word">DITA</span> 4: <span data-key="kos_d4_t">Ujëvarat e Mirushës & Prizren</span></span><i class="fas fa-plus"></i></div>
+            <div class="day-content"><p data-key="kos_d4_d"></p><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjBrQPjWUQK215kbQ_-m3uNJY5tFfUG5222zEN8gQwN_hNKg3lPdEXV9s3WUAd0zoBsrTbHiGOR2DVzV23T6rq1gYgoCaoM4Z2d0qyMew8sz7BlTVo0KqvndKnVO2saBKCi2v1U6EIM5BlXmiRXu9ZhFSp6WEWHnfERBSeQzj8OUE2vLMJMj0OS-dxDwA/w1200-h630-p-k-no-nu/1%20%20%20%20UJEVARA%20E%20MIRUSHES1.jpg"></div>
+        </div>
+        <div class="day-box">
+            <div class="day-header" onclick="toggleDay(this)"><span><span data-key="day_word">DITA</span> 5: <span data-key="kos_d5_t">Prizreni i Lidhjes</span></span><i class="fas fa-plus"></i></div>
+            <div class="day-content"><p data-key="kos_d5_d"></p><img src="https://vizitoshqip.com/fileadmin/_processed_/5/e/csm_Lidhja-e-Prizrenit1_16cb411d48.jpg"></div>
+        </div>
+        <div class="day-box">
+            <div class="day-header" onclick="toggleDay(this)"><span><span data-key="day_word">DITA</span> 6: <span data-key="kos_d6_t">Gjakovë - Përmbyllja</span></span><i class="fas fa-plus"></i></div>
+            <div class="day-content"><p data-key="kos_d6_d"></p><img src="https://www.mirygiramondo.com/wp-content/uploads/2025/01/20240811_170021.jpg"></div>
+        </div>
+        <div class="day-box">
+            <div class="day-header" onclick="toggleDay(this)"><span><span data-key="day_word">DITA</span> 7: <span data-key="kos_d7_t">Përfundimi</span></span><i class="fas fa-plus"></i></div>
+            <div class="day-content"><p data-key="kos_d7_d"></p></div>
         </div>
         <div class="cta-box">
-            <h3 class="cta-text">Book your Kosovo Experience</h3>
-            <a href="#contact" class="btn-book" onclick="setInterest('Kosovo')">RESERVE THIS TOUR</a>
+            <h3 data-key="cta_kos">Zbuloni Zemrën e Ballkanit</h3>
+            <button class="btn-book" onclick="setInterest('kos')" data-key="btn_book">REZERVO TANI</button>
         </div>
     </div>
 
     <div id="albania-tours" class="country-section">
         <div class="day-box">
-            <div class="day-header" onclick="toggleDay(this)"><span>DAY 1: Tirana & Dajti Mountain</span><i class="fas fa-plus"></i></div>
-            <div class="day-content">
-                <p>Explore the capital of Albania. Take the cable car to Dajti Mountain for a panoramic view.</p>
-                <img src="https://tse2.mm.bing.net/th/id/OIP.1iykOu91uKJLKEAVDM7ijQHaE0?w=1660&h=1080&rs=1&pid=ImgDetMain">
-            </div>
+            <div class="day-header" onclick="toggleDay(this)"><span><span data-key="day_word">DITA</span> 1: <span data-key="alb_d1_t">Tiranë & Durrës</span></span><i class="fas fa-plus"></i></div>
+            <div class="day-content"><p data-key="alb_d1_d"></p><img src="https://www.visit-tirana.com/wp-content/uploads/2023/11/340_Air-Albania-Stadium-Tirana-1.webp"></div>
+        </div>
+        <div class="day-box">
+            <div class="day-header" onclick="toggleDay(this)"><span><span data-key="day_word">DITA</span> 2: <span data-key="alb_d2_t">Kruja Historike</span></span><i class="fas fa-plus"></i></div>
+            <div class="day-content"><p data-key="alb_d2_d"></p><img src="https://www.visitalbania.app/wp-content/uploads/2022/07/kruja-pazar-6.jpg"></div>
+        </div>
+        <div class="day-box">
+            <div class="day-header" onclick="toggleDay(this)"><span><span data-key="day_word">DITA</span> 3: <span data-key="alb_d3_t">Berati - Qyteti i Një mbi Një Dritareve</span></span><i class="fas fa-plus"></i></div>
+            <div class="day-content"><p data-key="alb_d3_d"></p><img src="https://img.freepik.com/premium-photo/albanian-old-city-berat-with-view-berat-castle-walls-tiled-roofs-houses_527096-53005.jpg?w=2000"></div>
+        </div>
+        <div class="day-box">
+            <div class="day-header" onclick="toggleDay(this)"><span><span data-key="day_word">DITA</span> 4: <span data-key="alb_d4_t">Shkodër & Ulqin</span></span><i class="fas fa-plus"></i></div>
+            <div class="day-content"><p data-key="alb_d4_d"></p><img src="https://www.reisroutes.be/userfiles/fotos/uitzicht-op-het-rozafakasteel-in-shkoder-albanie_39827_xl.jpg"></div>
+        </div>
+        <div class="day-box">
+            <div class="day-header" onclick="toggleDay(this)"><span><span data-key="day_word">DITA</span> 5: <span data-key="alb_d5_t">Ulqin & Plazhi i Madh</span></span><i class="fas fa-plus"></i></div>
+            <div class="day-content"><p data-key="alb_d5_d"></p><img src="https://media.istockphoto.com/id/2167087474/photo/amazing-view-on-ulcinj-town-in-montenegro-clock-tower-of-ulcinj-sahat-kulla-lami-mosque.jpg?s=612x612&w=0&k=20&c=OMCfW2xWbuVJIINQ222jtmPAQuWTdmCyNttgC-Nw_as="></div>
+        </div>
+        <div class="day-box">
+            <div class="day-header" onclick="toggleDay(this)"><span><span data-key="day_word">DITA</span> 6: <span data-key="alb_d6_t">Kthimi në Tiranë</span></span><i class="fas fa-plus"></i></div>
+            <div class="day-content"><p data-key="alb_d6_d"></p><img src="https://sevillavisita.com/wp-content/uploads/2019/12/Portada-Tour-guiado-Triana-768x512.jpg"></div>
+        </div>
+        <div class="day-box">
+            <div class="day-header" onclick="toggleDay(this)"><span><span data-key="day_word">DITA</span> 7: <span data-key="alb_d7_t">Largimi</span></span><i class="fas fa-plus"></i></div>
+            <div class="day-content"><p data-key="alb_d7_d"></p></div>
         </div>
         <div class="cta-box">
-            <h3 class="cta-text">Discover the beauty of Albania</h3>
-            <a href="#contact" class="btn-book" onclick="setInterest('Albania')">RESERVE THIS TOUR</a>
+            <h3 data-key="cta_alb">Zbuloni Shqipërinë Magjike</h3>
+            <button class="btn-book" onclick="setInterest('alb')" data-key="btn_book">REZERVO TANI</button>
         </div>
     </div>
 
     <div id="bosnia-tours" class="country-section">
         <div class="day-box">
-            <div class="day-header" onclick="toggleDay(this)"><span>DAY 1: Sarajevo Heart of Balkans</span><i class="fas fa-plus"></i></div>
-            <div class="day-content">
-                <p>Visit Baščaršija, the Tunnel of Hope and the beautiful Vrelo Bosne springs.</p>
-                <img src="https://th.bing.com/th/id/R.69c0b550bb9a0aa96ca82ab50390ddb7?rik=zdK3YIOAzZc%2bAw&pid=ImgRaw&r=0">
-            </div>
+            <div class="day-header" onclick="toggleDay(this)"><span><span data-key="day_word">DITA</span> 1: <span data-key="bos_d1_t">Mbërritja & Akomodimi</span></span><i class="fas fa-plus"></i></div>
+            <div class="day-content"><p data-key="bos_d1_d"></p><img src=""></div>
+        </div>
+        <div class="day-box">
+            <div class="day-header" onclick="toggleDay(this)"><span><span data-key="day_word">DITA</span> 2: <span data-key="bos_d2_t">Sarajevë - Historia dhe Kultura</span></span><i class="fas fa-plus"></i></div>
+            <div class="day-content"><p data-key="bos_d2_d"></p><img src="https://th.bing.com/th/id/R.69c0b550bb9a0aa96ca82ab50390ddb7?rik=zdK3YIOAzZc%2bAw&pid=ImgRaw&r=0"></div>
+        </div>
+        <div class="day-box">
+            <div class="day-header" onclick="toggleDay(this)"><span><span data-key="day_word">DITA</span> 3: <span data-key="bos_d3_t">Konjic & Mostar</span></span><i class="fas fa-plus"></i></div>
+            <div class="day-content"><p data-key="bos_d3_d"></p><img src="https://bosnia-travel.ba/wp-content/uploads/Cities/Konjic.jpg"></div>
+        </div>
+        <div class="day-box">
+            <div class="day-header" onclick="toggleDay(this)"><span><span data-key="day_word">DITA</span> 4: <span data-key="bos_d4_t">Mostar & Jajce</span></span><i class="fas fa-plus"></i></div>
+            <div class="day-content"><p data-key="bos_d4_d"></p><img src="https://img.freepik.com/premium-photo/historical-mostar-bridge-known-also-as-stari-most-old-bridge-mostar-bosnia-herzegovina_527096-52758.jpg"></div>
+        </div>
+        <div class="day-box">
+            <div class="day-header" onclick="toggleDay(this)"><span><span data-key="day_word">DITA</span> 5: <span data-key="bos_d5_t">Travnik & Sarajevë</span></span><i class="fas fa-plus"></i></div>
+            <div class="day-content"><p data-key="bos_d5_d"></p><img src="https://media-cdn.tripadvisor.com/media/attractions-splice-spp-720x480/0c/00/ce/0f.jpg"></div>
+        </div>
+        <div class="day-box">
+            <div class="day-header" onclick="toggleDay(this)"><span><span data-key="day_word">DITA</span> 6: <span data-key="bos_d6_t">Visoko & Srebrenica</span></span><i class="fas fa-plus"></i></div>
+            <div class="day-content"><p data-key="bos_d6_d"></p><img src="https://t4.ftcdn.net/jpg/02/11/56/15/360_F_211561531_6vb0b1yMvIsxcBiIlFOiUfhSLu3BCZ99.jpg"></div>
+        </div>
+        <div class="day-box">
+            <div class="day-header" onclick="toggleDay(this)"><span><span data-key="day_word">DITA</span> 7: <span data-key="bos_d7_t">Sarajevë - Ditë e Lirë</span></span><i class="fas fa-plus"></i></div>
+            <div class="day-content"><p data-key="bos_d7_d"></p><img src="https://i.pinimg.com/originals/9e/1d/77/9e1d775db0ee3b4a9f7584a0f00bfb33.jpg"></div>
+        </div>
+        <div class="day-box">
+            <div class="day-header" onclick="toggleDay(this)"><span><span data-key="day_word">DITA</span> 8: <span data-key="bos_d8_t">Kthimi</span></span><i class="fas fa-plus"></i></div>
+            <div class="day-content"><p data-key="bos_d8_d"></p></div>
         </div>
         <div class="cta-box">
-            <h3 class="cta-text">Explore History in Bosnia</h3>
-            <a href="#contact" class="btn-book" onclick="setInterest('Bosnia')">RESERVE THIS TOUR</a>
+            <h3 data-key="cta_bos">Përjetoni Shpirtin e Bosnjës</h3>
+            <button class="btn-book" onclick="setInterest('bos')" data-key="btn_book">REZERVO TANI</button>
         </div>
     </div>
 
     <div id="macedonia-tours" class="country-section">
         <div class="day-box">
-            <div class="day-header" onclick="toggleDay(this)"><span>DAY 1: Skopje Old Bazaar</span><i class="fas fa-plus"></i></div>
-            <div class="day-content">
-                <p>Visit the Stone Bridge, Alexander the Great Square, and the historic Kale Fortress.</p>
-                <img src="https://preview.redd.it/skopje-castle-sunset-v0-1d6y4cm47wy91.jpg?auto=webp&s=ddc8ee2932b1e861404b2f11e6179b58fe7bfd06">
-            </div>
+            <div class="day-header" onclick="toggleDay(this)"><span><span data-key="day_word">DITA</span> 1: <span data-key="mac_d1_t">Mbërritja në Shkup</span></span><i class="fas fa-plus"></i></div>
+            <div class="day-content"><p data-key="mac_d1_d"></p><img src="https://preview.redd.it/skopje-castle-sunset-v0-1d6y4cm47wy91.jpg?auto=webp&s=ddc8ee2932b1e861404b2f11e6179b58fe7bfd06"></div>
+        </div>
+        <div class="day-box">
+            <div class="day-header" onclick="toggleDay(this)"><span><span data-key="day_word">DITA</span> 2: <span data-key="mac_d2_t">Shkup & Ohër</span></span><i class="fas fa-plus"></i></div>
+            <div class="day-content"><p data-key="mac_d2_d"></p><img src="https://www.logicno.com/wp-content/uploads/2016/09/ohrid-naslovna.jpg"></div>
+        </div>
+        <div class="day-box">
+            <div class="day-header" onclick="toggleDay(this)"><span><span data-key="day_word">DITA</span> 3: <span data-key="mac_d3_t">Tetovë & Shkup</span></span><i class="fas fa-plus"></i></div>
+            <div class="day-content"><p data-key="mac_d3_d"></p><img src="https://explore.mk/wp-content/uploads/2020/02/shutterstock_1373346650.jpg"></div>
+        </div>
+        <div class="day-box">
+            <div class="day-header" onclick="toggleDay(this)"><span><span data-key="day_word">DITA</span> 4: <span data-key="mac_d4_t">Strugë</span></span><i class="fas fa-plus"></i></div>
+            <div class="day-content"><p data-key="mac_d4_d"></p><img src="https://tripjive.com/wp-content/uploads/2024/07/Struga-and-Ohrid-1068x610.jpg"></div>
+        </div>
+        <div class="day-box">
+            <div class="day-header" onclick="toggleDay(this)"><span><span data-key="day_word">DITA</span> 5: <span data-key="mac_d5_t">Manastir</span></span><i class="fas fa-plus"></i></div>
+            <div class="day-content"><p data-key="mac_d5_d"></p><img src="https://macedonia-timeless.com/img/bgs/Manastir_bigorski_BG.jpg"></div>
+        </div>
+        <div class="day-box">
+            <div class="day-header" onclick="toggleDay(this)"><span><span data-key="day_word">DITA</span> 6: <span data-key="mac_d6_t">Shkup - Përmbyllja</span></span><i class="fas fa-plus"></i></div>
+            <div class="day-content"><p data-key="mac_d6_d"></p><img src="https://i.redd.it/6angtp6vkod31.jpg"></div>
+        </div>
+        <div class="day-box">
+            <div class="day-header" onclick="toggleDay(this)"><span><span data-key="day_word">DITA</span> 7: <span data-key="mac_d7_t">Përfundimi</span></span><i class="fas fa-plus"></i></div>
+            <div class="day-content"><p data-key="mac_d7_d"></p></div>
         </div>
         <div class="cta-box">
-            <h3 class="cta-text">Unveil Macedonia's Culture</h3>
-            <a href="#contact" class="btn-book" onclick="setInterest('North Macedonia')">RESERVE THIS TOUR</a>
+            <h3 data-key="cta_mac">Zbuloni thesaret e Maqedonisë</h3>
+            <button class="btn-book" onclick="setInterest('mac')" data-key="btn_book">REZERVO TANI</button>
         </div>
     </div>
 </div>
 
 <div class="container" id="contact">
     <div class="form-container">
-        <h2 id="contact-h">Get a Personal Quote</h2>
+        <h2 data-key="quote_title">Merrni një ofertë</h2>
         <form action="https://getform.io/f/allykxga" method="POST">
-            <div class="form-group"><input type="text" name="name" placeholder="Name" required></div>
-            <div class="form-group"><input type="email" name="email" placeholder="Email" required></div>
+            <div class="form-group"><input type="text" name="name" placeholder="Emri" data-key="ph_name" required></div>
+            <div class="form-group"><input type="email" name="email" placeholder="Email" data-key="ph_email" required></div>
             <div class="form-group">
-                <textarea name="message" id="message-field" rows="5" placeholder="Message" required></textarea>
+                <textarea name="message" id="message-field" rows="5" placeholder="Mesazhi" data-key="ph_msg" required></textarea>
             </div>
-            <button type="submit" id="btn-send" style="width:100%; padding:15px; background:var(--gold); color:white; border:none; border-radius:5px; font-weight:700; cursor:pointer;">SEND REQUEST</button>
+            <button type="submit" style="width:100%; padding:15px; background:var(--gold); color:white; border:none; border-radius:5px; font-weight:700; cursor:pointer;" data-key="btn_send">DËRGO KËRKESËN</button>
         </form>
     </div>
 </div>
@@ -238,25 +301,199 @@
 
 <script>
     const translations = {
-        en: { home: "Home", tours: "Tours", contact: "Contact", hero: "BALKAN EXPLORER", h_sub: "Unforgettable journeys", f1: "4-5 Star Hotels", f2: "Luxury Coach", f3: "Halal Options", f4: "Licensed Guides", cta: "RESERVE THIS TOUR", send: "SEND REQUEST" },
-        tr: { home: "Anasayfa", tours: "Turlar", contact: "İletişim", hero: "BALKAN KAŞİFİ", h_sub: "Unutulmaz yolculuklar", f1: "4-5 Yıldızlı Oteller", f2: "Lüks Otobüs", f3: "Helal Seçenekler", f4: "Lisanslı Rehberler", cta: "REZERVASYON YAP", send: "TALEP GÖNDER" },
-        sq: { home: "Ballina", tours: "Turet", contact: "Kontakti", hero: "EKSPLORUESI I BALLKANIT", h_sub: "Udhëtime të paharrueshme", f1: "Hotele 4-5 Yje", f2: "Autobus Luksoz", f3: "Opsione Halal", f4: "Guidë e Licencuar", cta: "REZERVO TUREN", send: "DËRGO KËRKESË" },
-        bs: { home: "Početna", tours: "Ture", contact: "Kontakt", hero: "ISTRAŽIVAČ BALKANA", h_sub: "Nezaboravna putovanja", f1: "Hoteli 4-5 Zvjezdica", f2: "Luksuzni Autobus", f3: "Halal Opcije", f4: "Licencirani Vodiči", cta: "REZERVIŠI TURU", send: "POŠALJI ZAHTJEV" }
+        sq: {
+            nav_home: "Ballina", nav_tours: "Turet", nav_contact: "Kontakti", day_word: "DITA",
+            hero_title: "EKSPLORUESI I BALLKANIT", hero_sub: "Udhëtime të paharrueshme mes historisë dhe natyrës",
+            f1: "Hotele 4-5 Yje", f2: "Autobus Luksoz", f3: "Opsione Halal", f4: "Guidë e Licencuar",
+            btn_kos: "KOSOVA", btn_alb: "SHQIPËRIA", btn_bos: "BOSNJA", btn_mac: "MAQEDONIA",
+            btn_book: "REZERVO TANI", btn_send: "DËRGO KËRKESËN",
+            quote_title: "Merrni një ofertë", ph_name: "Emri juaj", ph_email: "E-maili juaj", ph_msg: "Mesazhi juaj...",
+            cta_kos: "Zbuloni Zemrën e Ballkanit", cta_alb: "Zbuloni Shqipërinë Magjike", cta_bos: "Përjetoni Shpirtin e Bosnjës", cta_mac: "Zbuloni thesaret e Maqedonisë",
+            int_msg: "Jam i interesuar për turin: ",
+            tour_kos: "Kosova (7 Ditë)", tour_alb: "Shqipëria (7 Ditë)", tour_bos: "Bosnja (8 Ditë)", tour_mac: "Maqedonia (7 Ditë)",
+
+            kos_d1_t: "Prishtinë - Kryeqyteti", kos_d1_d: "<strong>AM:</strong> Arritja në Prishtinë dhe akomodimi në hotel.<br><strong>PM:</strong> Vizitë në qendër të Prishtinës, monumenti Newborn dhe bulevardi 'Nënë Tereza'.",
+            kos_d2_t: "Gazimestan & Prekaz", kos_d2_d: "<strong>AM:</strong> Vizitë historike në Gazimestan dhe Kompleksin 'Adem Jashari'.<br><strong>PM:</strong> Akomodimi dhe pushim.",
+            kos_d3_t: "Gadime & Brezovicë", kos_d3_d: "<strong>AM:</strong> Eksplorimi i Shpellës së Gadimes.<br><strong>PM:</strong> Udhëtim drejt Brezovicës dhe Prevallës.",
+            kos_d4_t: "Ujëvarat e Mirushës & Prizren", kos_d4_d: "<strong>AM:</strong> Vizitë në Ujëvarat e Mirushës.<br><strong>PM:</strong> Udhëtim drejt qytetit historik të Prizrenit.",
+            kos_d5_t: "Prizreni i Lidhjes", kos_d5_d: "<strong>AM:</strong> Vizitë në Kala, Lidhjen e Prizrenit dhe Xhaminë e Sinan Pashës.<br><strong>PM:</strong> Shëtitje në Shadërvan.",
+            kos_d6_t: "Gjakovë - Përmbyllja", kos_d6_d: "<strong>AM:</strong> Vizitë në Çarshinë e Madhe të Gjakovës.<br><strong>PM:</strong> Përmbyllja e turit.",
+            kos_d7_t: "Përfundimi", kos_d7_d: "<strong>AM:</strong> Kohë e lirë për suvenire dhe transferta.<br><strong>Fundi i udhëtimit.</strong>",
+
+            alb_d1_t: "Tiranë & Durrës", alb_d1_d: "<strong>AM:</strong> Arritja në Tiranë. Vizitë në Sheshin Skënderbej.<br><strong>PM:</strong> Vizitë në Amfiteatrin e Durrësit.",
+            alb_d2_t: "Kruja Historike", alb_d2_d: "<strong>AM:</strong> Vizitë në Kalanë e Krujës dhe Pazarin.<br><strong>PM:</strong> Kthimi në Tiranë.",
+            alb_d3_t: "Berati - Qyteti i 1000 Dritareve", alb_d3_d: "<strong>AM:</strong> Udhëtim drejt Beratit (UNESCO).<br><strong>PM:</strong> Vizitë në Muzeun Onufri.",
+            alb_d4_t: "Shkodër & Ulqin", alb_d4_d: "<strong>AM:</strong> Vizitë në Shkodër dhe Kalanë e Rozafës.<br><strong>PM:</strong> Kalimi i kufirit për në Ulqin.",
+            alb_d5_t: "Ulqin & Plazhi i Madh", alb_d5_d: "<strong>AM:</strong> Shijimi i Plazhit të Madh.<br><strong>PM:</strong> Kohë e lirë buzë detit.",
+            alb_d6_t: "Kthimi në Tiranë", alb_d6_d: "<strong>AM:</strong> Kthimi drejt Tiranës.<br><strong>PM:</strong> Mbrëmje e lirë në zonën e Bllokut.",
+            alb_d7_t: "Largimi", alb_d7_d: "<strong>AM:</strong> Blerjet e fundit dhe transferta në aeroport.",
+
+            bos_d1_t: "Mbërritja & Akomodimi", bos_d1_d: "<strong>AM:</strong> Arritja në aeroport dhe akomodimi.<br><strong>PM:</strong> Kohë e lirë.",
+            bos_d2_t: "Sarajevë - Historia", bos_d2_d: "<strong>AM:</strong> Vizitë në Bashçarshi.<br><strong>PM:</strong> Vazhdimi i turit në kryeqytet.",
+            bos_d3_t: "Konjic & Mostar", bos_d3_d: "<strong>AM:</strong> Vizitë në Konjic.<br><strong>PM:</strong> Vizitë në Urën e Famshme të Mostarit.",
+            bos_d4_t: "Mostar & Jajce", bos_d4_d: "<strong>AM:</strong> Eksplorimi i Mostarit.<br><strong>PM:</strong> Vizitë në ujëvarat e Jajces.",
+            bos_d5_t: "Travnik & Sarajevë", bos_d5_d: "<strong>AM:</strong> Vizitë në Travnik (Qyteti i Vezirëve).<br><strong>PM:</strong> Kthimi në Sarajevë.",
+            bos_d6_t: "Visoko & Srebrenica", bos_d6_d: "<strong>AM:</strong> Piramidat në Visoko.<br><strong>PM:</strong> Vizitë memoriale në Srebrenicë.",
+            bos_d7_t: "Sarajevë - Ditë e Lirë", bos_d7_d: "<strong>AM:</strong> Pikat panoramike.<br><strong>PM:</strong> Kohë e lirë për shopping.",
+            bos_d8_t: "Kthimi", bos_d8_d: "<strong>AM:</strong> Transferta për në aeroport.",
+
+            mac_d1_t: "Mbërritja në Shkup", mac_d1_d: "<strong>AM:</strong> Arritja dhe pritja.<br><strong>PM:</strong> Akomodimi në hotel.",
+            mac_d2_t: "Shkup & Ohër", mac_d2_d: "<strong>AM:</strong> Çarshia e Vjetër e Shkupit.<br><strong>PM:</strong> Udhëtimi drejt Ohrit (UNESCO).",
+            mac_d3_t: "Tetovë & Shkup", mac_d3_d: "<strong>AM:</strong> Xhamia e Larme në Tetovë.<br><strong>PM:</strong> Kthimi në Shkup.",
+            mac_d4_t: "Strugë", mac_d4_d: "<strong>AM:</strong> Vizitë në qytetin e poezisë.<br><strong>PM:</strong> Kohë e lirë buzë liqenit.",
+            mac_d5_t: "Manastir (Bitola)", mac_d5_d: "<strong>AM:</strong> Qyteti i konsujve dhe Shirok Sokak.<br><strong>PM:</strong> Rrënojat e Heraclea.",
+            mac_d6_t: "Shkup - Përmbyllja", mac_d6_d: "<strong>AM:</strong> Kalaja Kale ose Kanioni i Matkës.<br><strong>PM:</strong> Darkë përmbyllëse.",
+            mac_d7_t: "Përfundimi", mac_d7_d: "<strong>AM:</strong> Transferta në aeroport."
+        },
+        en: {
+            nav_home: "Home", nav_tours: "Tours", nav_contact: "Contact", day_word: "DAY",
+            hero_title: "BALKAN EXPLORER", hero_sub: "Unforgettable journeys across history and nature",
+            f1: "4-5 Star Hotels", f2: "Luxury Coach", f3: "Halal Options", f4: "Licensed Guides",
+            btn_kos: "KOSOVO", btn_alb: "ALBANIA", btn_bos: "BOSNIA", btn_mac: "MACEDONIA",
+            btn_book: "BOOK NOW", btn_send: "SEND REQUEST",
+            quote_title: "Get a Personal Quote", ph_name: "Your Name", ph_email: "Your Email", ph_msg: "Your Message...",
+            cta_kos: "Discover the Heart of the Balkans", cta_alb: "Discover Magical Albania", cta_bos: "Experience the Spirit of Bosnia", cta_mac: "Discover Macedonia's Treasures",
+            int_msg: "I am interested in the tour: ",
+            tour_kos: "Kosovo (7 Days)", tour_alb: "Albania (7 Days)", tour_bos: "Bosnia (8 Days)", tour_mac: "Macedonia (7 Days)",
+
+            kos_d1_t: "Pristina - The Capital", kos_d1_d: "<strong>AM:</strong> Arrival in Pristina and hotel check-in.<br><strong>PM:</strong> Visit city center, Newborn monument and 'Mother Teresa' boulevard.",
+            kos_d2_t: "Gazimestan & Prekaz", kos_d2_d: "<strong>AM:</strong> Historical visit to Gazimestan and 'Adem Jashari' Memorial.<br><strong>PM:</strong> Rest and accommodation.",
+            kos_d3_t: "Gadime & Brezovica", kos_d3_d: "<strong>AM:</strong> Explore the Marble Cave.<br><strong>PM:</strong> Travel to the mountains of Brezovica.",
+            kos_d4_t: "Mirusha Waterfalls & Prizren", kos_d4_d: "<strong>AM:</strong> Visit the stunning Mirusha Waterfalls.<br><strong>PM:</strong> Travel to historic Prizren.",
+            kos_d5_t: "Prizren of the League", kos_d5_d: "<strong>AM:</strong> Visit the Fortress, Prizren League and Sinan Pasha Mosque.<br><strong>PM:</strong> Walk in Shadervan.",
+            kos_d6_t: "Gjakova - Conclusion", kos_d6_d: "<strong>AM:</strong> Visit the Old Bazaar of Gjakova.<br><strong>PM:</strong> Tour conclusion.",
+            kos_d7_t: "Departure", kos_d7_d: "<strong>AM:</strong> Free time for souvenirs and airport transfer.<br><strong>End of the journey.</strong>",
+
+            alb_d1_t: "Tirana & Durrës", alb_d1_d: "<strong>AM:</strong> Arrival in Tirana. Visit Skanderbeg Square.<br><strong>PM:</strong> Visit Durrës Amphitheatre.",
+            alb_d2_t: "Historic Kruja", alb_d2_d: "<strong>AM:</strong> Visit Kruja Castle and the Old Bazaar.<br><strong>PM:</strong> Return to Tirana.",
+            alb_d3_t: "Berat - City of 1000 Windows", alb_d3_d: "<strong>AM:</strong> Travel to Berat (UNESCO).<br><strong>PM:</strong> Visit the Onufri Museum.",
+            alb_d4_t: "Shkodra & Ulcinj", alb_d4_d: "<strong>AM:</strong> Visit Shkodra and Rozafa Castle.<br><strong>PM:</strong> Cross border to Ulcinj.",
+            alb_d5_t: "Ulcinj & Long Beach", alb_d5_d: "<strong>AM:</strong> Enjoy the famous Long Beach.<br><strong>PM:</strong> Free time by the sea.",
+            alb_d6_t: "Return to Tirana", alb_d6_d: "<strong>AM:</strong> Return to Tirana.<br><strong>PM:</strong> Free evening in the Blloku area.",
+            alb_d7_t: "Departure", alb_d7_d: "<strong>AM:</strong> Last-minute shopping and airport transfer.",
+
+            bos_d1_t: "Arrival & Check-in", bos_d1_d: "<strong>AM:</strong> Airport arrival and check-in.<br><strong>PM:</strong> Free time.",
+            bos_d2_t: "Sarajevo - History", bos_d2_d: "<strong>AM:</strong> Visit Baščaršija.<br><strong>PM:</strong> Continue the capital tour.",
+            bos_d3_t: "Konjic & Mostar", bos_d3_d: "<strong>AM:</strong> Visit Konjic.<br><strong>PM:</strong> Visit the Famous Bridge of Mostar.",
+            bos_d4_t: "Mostar & Jajce", bos_d4_d: "<strong>AM:</strong> Explore Mostar further.<br><strong>PM:</strong> Visit the waterfalls in Jajce.",
+            bos_d5_t: "Travnik & Sarajevo", bos_d5_d: "<strong>AM:</strong> Visit Travnik (City of Viziers).<br><strong>PM:</strong> Return to Sarajevo.",
+            bos_d6_t: "Visoko & Srebrenica", bos_d6_d: "<strong>AM:</strong> The Pyramids of Visoko.<br><strong>PM:</strong> Memorial visit to Srebrenica.",
+            bos_d7_t: "Sarajevo - Free Day", bos_d7_d: "<strong>AM:</strong> Panoramic views.<br><strong>PM:</strong> Free time for shopping.",
+            bos_d8_t: "Departure", bos_d8_d: "<strong>AM:</strong> Transfer to the airport.",
+
+            mac_d1_t: "Arrival in Skopje", mac_d1_d: "<strong>AM:</strong> Arrival and group welcome.<br><strong>PM:</strong> Hotel check-in.",
+            mac_d2_t: "Skopje & Ohrid", mac_d2_d: "<strong>AM:</strong> Skopje Old Bazaar.<br><strong>PM:</strong> Travel to Ohrid (UNESCO).",
+            mac_d3_t: "Tetovo & Skopje", mac_d3_d: "<strong>AM:</strong> Painted Mosque in Tetovo.<br><strong>PM:</strong> Return to Skopje.",
+            mac_d4_t: "Struga", mac_d4_d: "<strong>AM:</strong> Visit the city of poetry.<br><strong>PM:</strong> Free time by the lake.",
+            mac_d5_t: "Bitola", mac_d5_d: "<strong>AM:</strong> City of Consuls and Shirok Sokak.<br><strong>PM:</strong> Heraclea ruins.",
+            mac_d6_t: "Skopje - Conclusion", mac_d6_d: "<strong>AM:</strong> Kale Fortress or Matka Canyon.<br><strong>PM:</strong> Farewell dinner.",
+            mac_d7_t: "Departure", mac_d7_d: "<strong>AM:</strong> Transfer to the airport."
+        },
+        tr: {
+            nav_home: "Anasayfa", nav_tours: "Turlar", nav_contact: "İletişim", day_word: "GÜN",
+            hero_title: "BALKAN KAŞİFİ", hero_sub: "Tarih ve doğa arasında unutulmaz yolculuklar",
+            f1: "4-5 Yıldızlı Oteller", f2: "Lüks Otobüs", f3: "Helal Seçenekler", f4: "Lisanslı Rehberler",
+            btn_kos: "KOSOVA", btn_alb: "ARNAVUTLUK", btn_bos: "BOSNA", btn_mac: "MAKEDONYA",
+            btn_book: "ŞİMDİ REZERVASYON YAP", btn_send: "TALEBİ GÖNDER",
+            quote_title: "Kişisel Teklif Alın", ph_name: "Adınız", ph_email: "E-postanız", ph_msg: "Mesajınız...",
+            cta_kos: "Balkanların Kalbini Keşfedin", cta_alb: "Büyülü Arnavutluk'u Keşfedin", cta_bos: "Bosna'nın Ruhunu Yaşayın", cta_mac: "Makedonya'nın Hazinelerini Keşfedin",
+            int_msg: "İlgilendiğim tur: ",
+            tour_kos: "Kosova (7 Gün)", tour_alb: "Arnavutluk (7 Gün)", tour_bos: "Bosna (8 Gün)", tour_mac: "Makedonya (7 Gün)",
+
+            kos_d1_t: "Priştine - Başkent", kos_d1_d: "<strong>AM:</strong> Priştine'ye varış ve otele yerleşme.<br><strong>PM:</strong> Şehir merkezi, Newborn anıtı ve 'Rahibe Teresa' bulvarı ziyareti.",
+            kos_d2_t: "Gazimestan & Prekaz", kos_d2_d: "<strong>AM:</strong> Gazimestan ve Prekaz anıtlarına tarihi ziyaret.<br><strong>PM:</strong> Dinlenme.",
+            kos_d3_t: "Gadime & Brezoviça", kos_d3_d: "<strong>AM:</strong> Mermer Mağarası ziyareti.<br><strong>PM:</strong> Brezoviça dağlarına yolculuk.",
+            kos_d4_t: "Miruşa Şelaleleri & Prizren", kos_d4_d: "<strong>AM:</strong> Miruşa Şelaleleri'ne ziyaret.<br><strong>PM:</strong> Tarihi Prizren şehrine yolculuk.",
+            kos_d5_t: "Prizren İttifakı", kos_d5_d: "<strong>AM:</strong> Kale, Prizren Birliği ve Sinan Paşa Camii.<br><strong>PM:</strong> Şadırvan'da yürüyüş.",
+            kos_d6_t: "Yakova - Kapanış", kos_d6_d: "<strong>AM:</strong> Eski Yakova Çarşısı ziyareti.<br><strong>PM:</strong> Tur kapanışı.",
+            kos_d7_t: "Ayrılış", kos_d7_d: "<strong>AM:</strong> Hediyelik eşya için serbest zaman ve havaalanı transferi.<br><strong>Yolculuğun sonu.</strong>",
+
+            alb_d1_t: "Tiran & Dıraç", alb_d1_d: "<strong>AM:</strong> Tiran'a varış. İskender Bey Meydanı.<br><strong>PM:</strong> Dıraç Amfitiyatrosu ziyareti.",
+            alb_d2_t: "Tarihi Akçahisar", alb_d2_d: "<strong>AM:</strong> Akçahisar Kalesi ve Eski Çarşı.<br><strong>PM:</strong> Tiran'a dönüş.",
+            alb_d3_t: "Berat - Bin Pencereli Şehir", alb_d3_d: "<strong>AM:</strong> Berat'a (UNESCO) yolculuk.<br><strong>PM:</strong> Onufri Müzesi ziyareti.",
+            alb_d4_t: "İşkodra & Ülgün", alb_d4_d: "<strong>AM:</strong> İşkodra ve Rozafa Kalesi.<br><strong>PM:</strong> Ülgün'e sınır geçişi.",
+            alb_d5_t: "Ülgün & Büyük Plaj", alb_d5_d: "<strong>AM:</strong> Büyük Plaj'ın tadını çıkarma.<br><strong>PM:</strong> Deniz kıyısında serbest zaman.",
+            alb_d6_t: "Tiran'a Dönüş", alb_d6_d: "<strong>AM:</strong> Tiran'a dönüş.<br><strong>PM:</strong> Blloku bölgesinde serbest akşam.",
+            alb_d7_t: "Ayrılış", alb_d7_d: "<strong>AM:</strong> Son alışverişler ve havaalanı transferi.",
+
+            bos_d1_t: "Varış & Konaklama", bos_d1_d: "<strong>AM:</strong> Havaalanına varış ve check-in.<br><strong>PM:</strong> Serbest zaman.",
+            bos_d2_t: "Saraybosna - Tarih", bos_d2_d: "<strong>AM:</strong> Başçarşı ziyareti.<br><strong>PM:</strong> Başkent turuna devam.",
+            bos_d3_t: "Konjic & Mostar", bos_d3_d: "<strong>AM:</strong> Konjic ziyareti.<br><strong>PM:</strong> Tarihi Mostar Köprüsü.",
+            bos_d4_t: "Mostar & Jajce", bos_d4_d: "<strong>AM:</strong> Mostar keşfi.<br><strong>PM:</strong> Jajce şelaleleri ziyareti.",
+            bos_d5_t: "Travnik & Saraybosna", bos_d5_d: "<strong>AM:</strong> Travnik ziyareti.<br><strong>PM:</strong> Saraybosna'ya dönüş.",
+            bos_d6_t: "Visoko & Srebrenitsa", bos_d6_d: "<strong>AM:</strong> Visoko Piramitleri.<br><strong>PM:</strong> Srebrenitsa anma ziyareti.",
+            bos_d7_t: "Saraybosna - Serbest Gün", bos_d7_d: "<strong>AM:</strong> Panoramik manzaralar.<br><strong>PM:</strong> Alışveriş için serbest zaman.",
+            bos_d8_t: "Ayrılış", bos_d8_d: "<strong>AM:</strong> Havaalanına transfer.",
+
+            mac_d1_t: "Üsküp'e Varış", mac_d1_d: "<strong>AM:</strong> Varış ve karşılama.<br><strong>PM:</strong> Otele yerleşme.",
+            mac_d2_t: "Üsküp & Ohri", mac_d2_d: "<strong>AM:</strong> Üsküp Eski Çarşısı.<br><strong>PM:</strong> Ohri'ye (UNESCO) yolculuk.",
+            mac_d3_t: "Kalkandelen & Üsküp", mac_d3_d: "<strong>AM:</strong> Alaca Camii ziyareti.<br><strong>PM:</strong> Üsküp'e dönüş.",
+            mac_d4_t: "Struga", mac_d4_d: "<strong>AM:</strong> Şiir şehri ziyareti.<br><strong>PM:</strong> Göl kenarında serbest zaman.",
+            mac_d5_t: "Manastır (Bitola)", mac_d5_d: "<strong>AM:</strong> Şirok Sokak ziyareti.<br><strong>PM:</strong> Herakleia kalıntıları.",
+            mac_d6_t: "Üsküp - Kapanış", mac_d6_d: "<strong>AM:</strong> Üsküp Kalesi veya Matka Kanyonu.<br><strong>PM:</strong> Veda yemeği.",
+            mac_d7_t: "Ayrılış", mac_d7_d: "<strong>AM:</strong> Havaalanına transfer."
+        },
+        bs: {
+            nav_home: "Početna", nav_tours: "Ture", nav_contact: "Kontakt", day_word: "DAN",
+            hero_title: "ISTRAŽIVAČ BALKANA", hero_sub: "Nezaboravna putovanja kroz istoriju i prirodu",
+            f1: "Hoteli 4-5 Zvjezdica", f2: "Luksuzni Autobus", f3: "Halal Opcije", f4: "Licencirani Vodiči",
+            btn_kos: "KOSOVO", btn_alb: "ALBANIJA", btn_bos: "BOSNA", btn_mac: "MAKEDONIJA",
+            btn_book: "REZERVIŠI SADA", btn_send: "POŠALJI ZAHTJEV",
+            quote_title: "Zatražite ponudu", ph_name: "Vaše Ime", ph_email: "Vaš Email", ph_msg: "Vaša Poruka...",
+            cta_kos: "Otkrijte srce Balkana", cta_alb: "Otkrijte magičnu Albaniju", cta_bos: "Doživite duh Bosne", cta_mac: "Otkrijte blaga Makedonije",
+            int_msg: "Zainteresovan/a sam za turu: ",
+            tour_kos: "Kosovo (7 Dana)", tour_alb: "Albanija (7 Dana)", tour_bos: "Bosna (8 Dana)", tour_mac: "Makedonija (7 Dana)",
+
+            kos_d1_t: "Priština - Glavni grad", kos_d1_d: "<strong>AM:</strong> Dolazak u Prištinu i smještaj.<br><strong>PM:</strong> Posjeta centru, spomeniku Newborn i bulevaru.",
+            kos_d2_t: "Gazimestan i Prekaz", kos_d2_d: "<strong>AM:</strong> Istorijska posjeta Gazimestanu i Prekazu.<br><strong>PM:</strong> Odmor.",
+            kos_d3_t: "Gadimlje i Brezovica", kos_d3_d: "<strong>AM:</strong> Mermerna pećina.<br><strong>PM:</strong> Putovanje ka planini Brezovici.",
+            kos_d4_t: "Vodopadi Miruše i Prizren", kos_d4_d: "<strong>AM:</strong> Posjeta vodopadima Miruše.<br><strong>PM:</strong> Putovanje za Prizren.",
+            kos_d5_t: "Prizrenska Liga", kos_d5_d: "<strong>AM:</strong> Tvrđava, Liga i Sinan-pašina džamija.<br><strong>PM:</strong> Šetnja Šadrvanom.",
+            kos_d6_t: "Đakovica - Završetak", kos_d6_d: "<strong>AM:</strong> Stara čaršija u Đakovici.<br><strong>PM:</strong> Završetak ture.",
+            kos_d7_t: "Odlazak", kos_d7_d: "<strong>AM:</strong> Transfer do aerodroma.<br><strong>Kraj putovanja.</strong>",
+
+            alb_d1_t: "Tirana i Drač", alb_d1_d: "<strong>AM:</strong> Dolazak u Tiranu. Skenderbegov trg.<br><strong>PM:</strong> Amfiteatar u Draču.",
+            alb_d2_t: "Istorijska Kroja", alb_d2_d: "<strong>AM:</strong> Tvrđava Kroja i stara čaršija.<br><strong>PM:</strong> Povratak u Tiranu.",
+            alb_d3_t: "Berat - Grad 1000 prozora", alb_d3_d: "<strong>AM:</strong> Putovanje u Berat (UNESCO).<br><strong>PM:</strong> Muzej Onufri.",
+            alb_d4_t: "Skadar i Ulcinj", alb_d4_d: "<strong>AM:</strong> Skadar i tvrđava Rozafa.<br><strong>PM:</strong> Prelazak granice ka Ulcinju.",
+            alb_d5_t: "Ulcinj i Velika plaža", alb_d5_d: "<strong>AM:</strong> Uživanje na Velikoj plaži.<br><strong>PM:</strong> Slobodno vrijeme na moru.",
+            alb_d6_t: "Povratak u Tiranu", alb_d6_d: "<strong>AM:</strong> Povratak za Tiranu.<br><strong>PM:</strong> Slobodno veče.",
+            alb_d7_t: "Odlazak", alb_d7_d: "<strong>AM:</strong> Transfer do aerodroma.",
+
+            bos_d1_t: "Dolazak i smještaj", bos_d1_d: "<strong>AM:</strong> Dolazak na aerodrom i smještaj.<br><strong>PM:</strong> Slobodno vrijeme.",
+            bos_d2_t: "Sarajevo - Istorija", bos_d2_d: "<strong>AM:</strong> Posjeta Baščaršiji.<br><strong>PM:</strong> Nastavak obilaska.",
+            bos_d3_t: "Konjic i Mostar", bos_d3_d: "<strong>AM:</strong> Posjeta Konjicu.<br><strong>PM:</strong> Stari most u Mostaru.",
+            bos_d4_t: "Mostar i Jajce", bos_d4_d: "<strong>AM:</strong> Dalje istraživanje Mostara.<br><strong>PM:</strong> Vodopadi u Jajcu.",
+            bos_d5_t: "Travnik i Sarajevo", bos_d5_d: "<strong>AM:</strong> Posjeta Travniku.<br><strong>PM:</strong> Povratak u Sarajevo.",
+            bos_d6_t: "Visoko i Srebrenica", bos_d6_d: "<strong>AM:</strong> Piramide u Visokom.<br><strong>PM:</strong> Posjeta Srebrenici.",
+            bos_d7_t: "Sarajevo - Slobodan dan", bos_d7_d: "<strong>AM:</strong> Panoramski pogled.<br><strong>PM:</strong> Slobodno vrijeme za šoping.",
+            bos_d8_t: "Odlazak", bos_d8_d: "<strong>AM:</strong> Transfer do aerodroma.",
+
+            mac_d1_t: "Dolazak u Skoplje", mac_d1_d: "<strong>AM:</strong> Dolazak i doček.<br><strong>PM:</strong> Smještaj u hotel.",
+            mac_d2_t: "Skoplje i Ohrid", mac_d2_d: "<strong>AM:</strong> Stara čaršija u Skoplju.<br><strong>PM:</strong> Putovanje u Ohrid (UNESCO).",
+            mac_d3_t: "Tetovo i Skoplje", mac_d3_d: "<strong>AM:</strong> Šarena džamija u Tetovu.<br><strong>PM:</strong> Povratak u Skoplje.",
+            mac_d4_t: "Struga", mac_d4_d: "<strong>AM:</strong> Posjeta gradu poezije.<br><strong>PM:</strong> Slobodno vrijeme uz jezero.",
+            mac_d5_t: "Bitola", mac_d5_d: "<strong>AM:</strong> Širok Sokak.<br><strong>PM:</strong> Ruševine Herakleje.",
+            mac_d6_t: "Skoplje - Završetak", mac_d6_d: "<strong>AM:</strong> Tvrđava Kale ili kanjon Matka.<br><strong>PM:</strong> Oproštajna večera.",
+            mac_d7_t: "Odlazak", mac_d7_d: "<strong>AM:</strong> Transfer do aerodroma."
+        }
     };
 
     function changeLanguage(lang) {
-        document.getElementById('nav-home').innerText = translations[lang].home;
-        document.getElementById('nav-tours').innerText = translations[lang].tours;
-        document.getElementById('nav-contact').innerText = translations[lang].contact;
-        document.getElementById('hero-title').innerText = translations[lang].hero;
-        document.getElementById('hero-sub').innerText = translations[lang].h_sub;
-        document.getElementById('f-hotel').innerText = translations[lang].f1;
-        document.getElementById('f-coach').innerText = translations[lang].f2;
-        document.getElementById('f-halal').innerText = translations[lang].f3;
-        document.getElementById('f-guide').innerText = translations[lang].f4;
-        document.getElementById('btn-send').innerText = translations[lang].send;
-        document.querySelectorAll('.btn-book').forEach(btn => btn.innerText = translations[lang].cta);
+        document.querySelectorAll('[data-key]').forEach(el => {
+            let key = el.getAttribute('data-key');
+            if (translations[lang] && translations[lang][key]) {
+                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                    el.placeholder = translations[lang][key];
+                } else {
+                    el.innerHTML = translations[lang][key];
+                }
+            }
+        });
     }
+
+    // Sigurohemi që gjuha shqipe hapet në fillim meqenëse ajo është selected
+    window.onload = () => changeLanguage('sq');
 
     function toggleDay(el) {
         const content = el.nextElementSibling;
@@ -275,13 +512,21 @@
         document.querySelectorAll('.btn-country').forEach(b => b.classList.remove('active'));
         document.getElementById(id + '-tours').style.display = 'block';
         btn.classList.add('active');
+        
+        window.scrollTo({ top: document.getElementById('itinerary').offsetTop - 100, behavior: 'smooth' });
     }
 
-    function setInterest(country) {
-        document.getElementById('message-field').value = "I am interested in the " + country + " tour. Please send me the details.";
+    function setInterest(countryPrefix) {
+        const lang = document.querySelector('.lang-select').value;
+        const msgIntro = translations[lang].int_msg;
+        const tourName = translations[lang]["tour_" + countryPrefix];
+        
+        document.getElementById('message-field').value = msgIntro + tourName;
+        
+        // Bën scroll poshtë tek forma e kontaktit automatikisht
+        document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
     }
 </script>
 
 </body>
 </html>
-
