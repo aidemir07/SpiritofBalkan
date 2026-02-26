@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Spirit of Balkan | Premium Travel</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --gold: #c5a059;
+            --green: #2e7d32;
+            --dark: #1a1a1a;
+            --light-gray: #f8f9fa;
+        }
+
+        * { box-sizing: border-box; scroll-behavior: smooth; }
+        
+        body {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            background: #fff;
+            color: var(--dark);
+        }
+
+        /* NAVIGATION & LANGUAGE */
+        nav {
+            background: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            height: 80px;
+            position: fixed;
+            top: 0; width: 100%;
+            z-index: 9999;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-links a {
+            color: var(--dark); text-decoration: none; font-weight: 600; 
+            margin: 0 15px; text-transform: uppercase; font-size: 13px;
+        }
+
+        .lang-select {
+            padding: 8px; border-radius: 5px; border: 1px solid var(--gold);
+            background: white; cursor: pointer; font-weight: 600;
+        }
+
+        /* HERO */
+        .hero {
+            height: 50vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('https://cdn.tourradar.com/s3/tour/1536x1552/110552_67e517f491bb4.jpg') center/cover;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            color: white; text-align: center; margin-top: 80px;
+        }
+        .hero h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(2em, 5vw, 4em); margin: 0; }
+
+        /* FEATURES bar */
+        .tour-features {
+            display: flex; justify-content: center; gap: 40px;
+            background: var(--light-gray); padding: 25px; flex-wrap: wrap;
+        }
+        .feature { text-align: center; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+        .feature i { display: block; font-size: 24px; color: var(--gold); margin-bottom: 8px; }
+
+        /* MAIN LAYOUT */
+        .container { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
+
+        .dest-buttons { display: flex; justify-content: center; gap: 10px; margin-bottom: 40px; flex-wrap: wrap; }
+        .btn-country {
+            padding: 12px 25px; border: 2px solid #eee; background: white;
+            cursor: pointer; font-weight: 700; border-radius: 30px; transition: 0.3s;
+        }
+        .btn-country.active { background: var(--gold); color: white; border-color: var(--gold); }
+
+        /* ACCORDION ITINERARY */
+        .day-box { background: white; margin-bottom: 12px; border-radius: 8px; border: 1px solid #eee; }
+        .day-header {
+            padding: 20px; cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; font-weight: 700; font-size: 15px;
+        }
+        .day-content {
+            padding: 0 20px; max-height: 0; overflow: hidden;
+            transition: 0.4s ease-out; background: #fafafa;
+        }
+        .day-content.open { max-height: 800px; padding: 20px; border-top: 1px solid #eee; }
+        .day-content img { width: 100%; border-radius: 8px; margin-top: 15px; }
+
+        /* CTA BOX */
+        .cta-box {
+            background: var(--dark); color: white; padding: 40px;
+            border-radius: 15px; text-align: center; margin: 50px 0;
+        }
+        .btn-book {
+            background: var(--gold); color: white; padding: 16px 45px;
+            text-decoration: none; font-weight: 700; border-radius: 5px; 
+            display: inline-block; margin-top: 20px; transition: 0.3s;
+        }
+        .btn-book:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(197, 160, 89, 0.4); }
+
+        /* CONTACT FORM */
+        .form-container { background: #fff; padding: 40px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+        .form-group { margin-bottom: 15px; }
+        .form-group input, .form-group textarea { 
+            width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 6px; font-family: inherit;
+        }
+
+        .whatsapp-float {
+            position: fixed; bottom: 30px; right: 30px; background: #25d366;
+            color: white; width: 60px; height: 60px; border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 10000;
+        }
+
+        .country-section { display: none; animation: fadeIn 0.4s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div style="font-family:'Orbitron'; font-weight: 700; color: var(--gold); font-size: 1.2em;">SPIRIT OF BALKAN</div>
+    <div class="nav-links">
+        <a href="#" id="nav-home">Home</a>
+        <a href="#itinerary" id="nav-tours">Tours</a>
+        <a href="#contact" id="nav-contact">Contact</a>
+    </div>
+    <select class="lang-select" onchange="changeLanguage(this.value)">
+        <option value="en">English</option>
+        <option value="tr">Türkçe</option>
+        <option value="sq">Shqip</option>
+        <option value="bs">Bosanski</option>
+    </select>
+</nav>
+
+<div class="hero">
+    <h1 id="hero-title">BALKAN EXPLORER</h1>
+    <p id="hero-sub">Unforgettable journeys across history and nature</p>
+</div>
+
+<div class="tour-features">
+    <div class="feature"><i class="fas fa-hotel"></i> <span id="f-hotel">4-5 Star Hotels</span></div>
+    <div class="feature"><i class="fas fa-bus"></i> <span id="f-coach">Luxury Coach</span></div>
+    <div class="feature"><i class="fas fa-utensils"></i> <span id="f-halal">Halal Options</span></div>
+    <div class="feature"><i class="fas fa-id-badge"></i> <span id="f-guide">Licensed Guides</span></div>
+</div>
+
+<div class="container" id="itinerary">
+    <div class="dest-buttons">
+        <button class="btn-country active" onclick="showCountry('kosovo', this)">KOSOVO</button>
+        <button class="btn-country" onclick="showCountry('albania', this)">ALBANIA</button>
+        <button class="btn-country" onclick="showCountry('bosnia', this)">BOSNIA</button>
+        <button class="btn-country" onclick="showCountry('macedonia', this)">MACEDONIA</button>
+    </div>
+
+    <div id="kosovo-tours" class="country-section" style="display:block;">
+        <div class="day-box">
+            <div class="day-header" onclick="toggleDay(this)"><span>DAY 1: Prizren City Tour</span><i class="fas fa-plus"></i></div>
+            <div class="day-content">
+                <p>08:00 Breakfast at hotel. 09:00 Departure to Prizren. 14:00 Visit Sinan Pasha Mosque and the Fortress.</p>
+                <img src="https://assets.bucketlistly.blog/sites/5adf778b6eabcc00190b75b1/content_entry5b155bed5711a8176e9f9783/643cf79f741dda0002e32eb1/files/prizren-kosovo-travel-photo-20230416143903166-photo-thumb.jpg">
+            </div>
+        </div>
+        <div class="day-box">
+            <div class="day-header" onclick="toggleDay(this)"><span>DAY 2: Rugova Canyon & Peja</span><i class="fas fa-plus"></i></div>
+            <div class="day-content"><p>08:00 Breakfast. 09:00 Hiking and sightseeing in Rugova Canyon. 15:00 Visit Peja Patriarchate.</p>
+            <img src="https://live.staticflickr.com/8461/7889046558_d3b3f6c256_b.jpg">
+        </div>
+        </div>
+        <div class="cta-box">
+            <h3 class="cta-text">Book your Kosovo Experience</h3>
+            <a href="#contact" class="btn-book" onclick="setInterest('Kosovo')">RESERVE THIS TOUR</a>
+        </div>
+    </div>
+
+    <div id="albania-tours" class="country-section">
+        <div class="day-box">
+            <div class="day-header" onclick="toggleDay(this)"><span>DAY 1: Tirana & Dajti Mountain</span><i class="fas fa-plus"></i></div>
+            <div class="day-content">
+                <p>Explore the capital of Albania. Take the cable car to Dajti Mountain for a panoramic view.</p>
+                <img src="https://tse2.mm.bing.net/th/id/OIP.1iykOu91uKJLKEAVDM7ijQHaE0?w=1660&h=1080&rs=1&pid=ImgDetMain">
+            </div>
+        </div>
+        <div class="cta-box">
+            <h3 class="cta-text">Discover the beauty of Albania</h3>
+            <a href="#contact" class="btn-book" onclick="setInterest('Albania')">RESERVE THIS TOUR</a>
+        </div>
+    </div>
+
+    <div id="bosnia-tours" class="country-section">
+        <div class="day-box">
+            <div class="day-header" onclick="toggleDay(this)"><span>DAY 1: Sarajevo Heart of Balkans</span><i class="fas fa-plus"></i></div>
+            <div class="day-content">
+                <p>Visit Baščaršija, the Tunnel of Hope and the beautiful Vrelo Bosne springs.</p>
+                <img src="https://th.bing.com/th/id/R.69c0b550bb9a0aa96ca82ab50390ddb7?rik=zdK3YIOAzZc%2bAw&pid=ImgRaw&r=0">
+            </div>
+        </div>
+        <div class="cta-box">
+            <h3 class="cta-text">Explore History in Bosnia</h3>
+            <a href="#contact" class="btn-book" onclick="setInterest('Bosnia')">RESERVE THIS TOUR</a>
+        </div>
+    </div>
+
+    <div id="macedonia-tours" class="country-section">
+        <div class="day-box">
+            <div class="day-header" onclick="toggleDay(this)"><span>DAY 1: Skopje Old Bazaar</span><i class="fas fa-plus"></i></div>
+            <div class="day-content">
+                <p>Visit the Stone Bridge, Alexander the Great Square, and the historic Kale Fortress.</p>
+                <img src="https://preview.redd.it/skopje-castle-sunset-v0-1d6y4cm47wy91.jpg?auto=webp&s=ddc8ee2932b1e861404b2f11e6179b58fe7bfd06">
+            </div>
+        </div>
+        <div class="cta-box">
+            <h3 class="cta-text">Unveil Macedonia's Culture</h3>
+            <a href="#contact" class="btn-book" onclick="setInterest('North Macedonia')">RESERVE THIS TOUR</a>
+        </div>
+    </div>
+</div>
+
+<div class="container" id="contact">
+    <div class="form-container">
+        <h2 id="contact-h">Get a Personal Quote</h2>
+        <form action="https://getform.io/f/allykxga" method="POST">
+            <div class="form-group"><input type="text" name="name" placeholder="Name" required></div>
+            <div class="form-group"><input type="email" name="email" placeholder="Email" required></div>
+            <div class="form-group">
+                <textarea name="message" id="message-field" rows="5" placeholder="Message" required></textarea>
+            </div>
+            <button type="submit" id="btn-send" style="width:100%; padding:15px; background:var(--gold); color:white; border:none; border-radius:5px; font-weight:700; cursor:pointer;">SEND REQUEST</button>
+        </form>
+    </div>
+</div>
+
+<a href="https://wa.me/381666773002" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+<script>
+    const translations = {
+        en: { home: "Home", tours: "Tours", contact: "Contact", hero: "BALKAN EXPLORER", h_sub: "Unforgettable journeys", f1: "4-5 Star Hotels", f2: "Luxury Coach", f3: "Halal Options", f4: "Licensed Guides", cta: "RESERVE THIS TOUR", send: "SEND REQUEST" },
+        tr: { home: "Anasayfa", tours: "Turlar", contact: "İletişim", hero: "BALKAN KAŞİFİ", h_sub: "Unutulmaz yolculuklar", f1: "4-5 Yıldızlı Oteller", f2: "Lüks Otobüs", f3: "Helal Seçenekler", f4: "Lisanslı Rehberler", cta: "REZERVASYON YAP", send: "TALEP GÖNDER" },
+        sq: { home: "Ballina", tours: "Turet", contact: "Kontakti", hero: "EKSPLORUESI I BALLKANIT", h_sub: "Udhëtime të paharrueshme", f1: "Hotele 4-5 Yje", f2: "Autobus Luksoz", f3: "Opsione Halal", f4: "Guidë e Licencuar", cta: "REZERVO TUREN", send: "DËRGO KËRKESË" },
+        bs: { home: "Početna", tours: "Ture", contact: "Kontakt", hero: "ISTRAŽIVAČ BALKANA", h_sub: "Nezaboravna putovanja", f1: "Hoteli 4-5 Zvjezdica", f2: "Luksuzni Autobus", f3: "Halal Opcije", f4: "Licencirani Vodiči", cta: "REZERVIŠI TURU", send: "POŠALJI ZAHTJEV" }
+    };
+
+    function changeLanguage(lang) {
+        document.getElementById('nav-home').innerText = translations[lang].home;
+        document.getElementById('nav-tours').innerText = translations[lang].tours;
+        document.getElementById('nav-contact').innerText = translations[lang].contact;
+        document.getElementById('hero-title').innerText = translations[lang].hero;
+        document.getElementById('hero-sub').innerText = translations[lang].h_sub;
+        document.getElementById('f-hotel').innerText = translations[lang].f1;
+        document.getElementById('f-coach').innerText = translations[lang].f2;
+        document.getElementById('f-halal').innerText = translations[lang].f3;
+        document.getElementById('f-guide').innerText = translations[lang].f4;
+        document.getElementById('btn-send').innerText = translations[lang].send;
+        document.querySelectorAll('.btn-book').forEach(btn => btn.innerText = translations[lang].cta);
+    }
+
+    function toggleDay(el) {
+        const content = el.nextElementSibling;
+        const icon = el.querySelector('i');
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            icon.className = 'fas fa-plus';
+        } else {
+            content.classList.add('open');
+            icon.className = 'fas fa-minus';
+        }
+    }
+
+    function showCountry(id, btn) {
+        document.querySelectorAll('.country-section').forEach(s => s.style.display = 'none');
+        document.querySelectorAll('.btn-country').forEach(b => b.classList.remove('active'));
+        document.getElementById(id + '-tours').style.display = 'block';
+        btn.classList.add('active');
+    }
+
+    function setInterest(country) {
+        document.getElementById('message-field').value = "I am interested in the " + country + " tour. Please send me the details.";
+    }
+</script>
+
+</body>
+</html>
